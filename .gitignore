@@ -4,5 +4,6 @@
 *.a
 *.d
 *.swp
+*.txt
 .cache/
 compile_commands.json
