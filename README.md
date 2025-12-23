@@ -39,7 +39,8 @@ Use the individual outputs for proper mixing.
 - gtk+-3.0-dev
 - cairo-dev
 
-On Ubuntu / Ubuntu Studio:
+## Building the plugin
+On Ubuntu Ubuntu Studio:
 
 Install build dependencies:
 sudo apt update
