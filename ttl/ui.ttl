@@ -1,0 +1,9 @@
+@prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix urid: <http://lv2plug.in/ns/ext/urid#> .
+
+<https://example.org/lv2/rs808#ui>
+  a ui:Gtk3UI ;
+  rdfs:label "RS808 UI" ;
+  ui:binary <rs808_ui.so> ;
+  ui:requiredFeature urid:map .

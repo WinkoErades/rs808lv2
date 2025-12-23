@@ -1,0 +1,302 @@
+@prefix atom: <http://lv2plug.in/ns/ext/atom#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix lv2:  <http://lv2plug.in/ns/lv2core#> .
+@prefix midi: <http://lv2plug.in/ns/ext/midi#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
+@prefix urid: <http://lv2plug.in/ns/ext/urid#> .
+@prefix units:<http://lv2plug.in/ns/extensions/units#> .
+
+<https://example.org/lv2/rs808>
+  a lv2:Plugin, lv2:InstrumentPlugin ;
+  doap:name "RS808" ;
+  rdfs:comment "MIDI-triggered drum synth. Dual-mono main outs plus mono per-instrument outs." ;
+  lv2:requiredFeature urid:map ;
+  ui:ui <https://example.org/lv2/rs808#ui> ;
+
+  lv2:port
+
+    ####################################################################
+    # Audio outputs (indices 0..14)
+    ####################################################################
+
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 0  ; lv2:symbol "main_l" ; lv2:name "Main L (dual mono)" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 1  ; lv2:symbol "main_r" ; lv2:name "Main R (dual mono)" ] ,
+
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 2  ; lv2:symbol "bd_out"  ; lv2:name "BD Out" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 3  ; lv2:symbol "sd_out"  ; lv2:name "SD Out" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 4  ; lv2:symbol "ch_out"  ; lv2:name "CH Out" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 5  ; lv2:symbol "oh_out"  ; lv2:name "OH Out" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 6  ; lv2:symbol "cp_out"  ; lv2:name "Clap Out" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 7  ; lv2:symbol "cb_out"  ; lv2:name "Cowbell Out" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 8  ; lv2:symbol "cy_out"  ; lv2:name "Cymbal Out" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 9  ; lv2:symbol "rim_out" ; lv2:name "Rimshot Out" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 10 ; lv2:symbol "ma_out"  ; lv2:name "Maracas Out" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 11 ; lv2:symbol "clv_out" ; lv2:name "Claves Out" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 12 ; lv2:symbol "lt_out"  ; lv2:name "LT Out" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 13 ; lv2:symbol "mt_out"  ; lv2:name "MT Out" ] ,
+    [ a lv2:AudioPort, lv2:OutputPort ; lv2:index 14 ; lv2:symbol "ht_out"  ; lv2:name "HT Out" ] ,
+
+    ####################################################################
+    # Atom ports (indices 15..16)
+    ####################################################################
+
+    [ a atom:AtomPort, lv2:InputPort ;
+      lv2:index 15 ; lv2:symbol "midi_in" ; lv2:name "MIDI In" ;
+      atom:bufferType atom:Sequence ;
+      atom:supports midi:MidiEvent
+    ] ,
+
+    [ a atom:AtomPort, lv2:OutputPort ;
+      lv2:index 16 ; lv2:symbol "notify" ; lv2:name "Notify" ;
+      atom:bufferType atom:Sequence
+    ] ,
+
+    ####################################################################
+    # Global controls (indices 17..19)
+    ####################################################################
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 17 ; lv2:symbol "master_level" ; lv2:name "Master Level" ;
+      lv2:default 0.80 ; lv2:minimum 0.0 ; lv2:maximum 1.0
+    ] ,
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 18 ; lv2:symbol "accent_amount" ; lv2:name "Global Accent Amount" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 19 ; lv2:symbol "cc_smooth_ms" ; lv2:name "CC Smoothing (ms)" ;
+      lv2:default 10.0 ; lv2:minimum 0.0 ; lv2:maximum 50.0 ;
+      units:unit units:ms
+    ] ,
+
+    ####################################################################
+    # BD (indices 20..23)
+    ####################################################################
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 20 ; lv2:symbol "bd_level" ; lv2:name "BD Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 21 ; lv2:symbol "bd_tune" ; lv2:name "BD Tune" ;
+      lv2:default 56.0 ; lv2:minimum 20.0 ; lv2:maximum 200.0 ;
+      units:unit units:hz
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 22 ; lv2:symbol "bd_decay" ; lv2:name "BD Decay" ;
+      lv2:default 30.0 ; lv2:minimum 0.0 ; lv2:maximum 60.0 ;
+      units:unit units:s
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 23 ; lv2:symbol "bd_click" ; lv2:name "BD Attack/Click" ;
+      lv2:default 0.50 ; lv2:minimum 0.0 ; lv2:maximum 1.0
+    ] ,
+
+    ####################################################################
+    # SD (indices 24..28)
+    ####################################################################
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 24 ; lv2:symbol "sd_level" ; lv2:name "SD Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 25 ; lv2:symbol "sd_tune" ; lv2:name "SD Tune" ;
+      lv2:default 340.0 ; lv2:minimum 50.0 ; lv2:maximum 2000.0 ;
+      units:unit units:hz
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 26 ; lv2:symbol "sd_decay" ; lv2:name "SD Decay" ;
+      lv2:default 4.20 ; lv2:minimum 0.05 ; lv2:maximum 10.0 ;
+      units:unit units:s
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 27 ; lv2:symbol "sd_tone" ; lv2:name "SD Tone" ;
+      lv2:default 0.50 ; lv2:minimum 0.0 ; lv2:maximum 1.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 28 ; lv2:symbol "sd_snappy" ; lv2:name "SD Snappy" ;
+      lv2:default 0.30 ; lv2:minimum 0.0 ; lv2:maximum 1.0
+    ] ,
+
+    ####################################################################
+    # LT/MT/HT (indices 29..37)
+    ####################################################################
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 29 ; lv2:symbol "lt_level" ; lv2:name "LT Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 30 ; lv2:symbol "lt_tune" ; lv2:name "LT Tune" ;
+      lv2:default 80.0 ; lv2:minimum 30.0 ; lv2:maximum 300.0 ;
+      units:unit units:hz
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 31 ; lv2:symbol "lt_decay" ; lv2:name "LT Decay" ;
+      lv2:default 20.0 ; lv2:minimum 0.0 ; lv2:maximum 30.0 ;
+      units:unit units:s
+    ] ,
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 32 ; lv2:symbol "mt_level" ; lv2:name "MT Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 33 ; lv2:symbol "mt_tune" ; lv2:name "MT Tune" ;
+      lv2:default 120.0 ; lv2:minimum 30.0 ; lv2:maximum 400.0 ;
+      units:unit units:hz
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 34 ; lv2:symbol "mt_decay" ; lv2:name "MT Decay" ;
+      lv2:default 15.0 ; lv2:minimum 0.0 ; lv2:maximum 30.0 ;
+      units:unit units:s
+    ] ,
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 35 ; lv2:symbol "ht_level" ; lv2:name "HT Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 36 ; lv2:symbol "ht_tune" ; lv2:name "HT Tune" ;
+      lv2:default 165.0 ; lv2:minimum 30.0 ; lv2:maximum 600.0 ;
+      units:unit units:hz
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 37 ; lv2:symbol "ht_decay" ; lv2:name "HT Decay" ;
+      lv2:default 10.0 ; lv2:minimum 0.0 ; lv2:maximum 30.0 ;
+      units:unit units:s
+    ] ,
+
+    ####################################################################
+    # CH (indices 38..40)
+    ####################################################################
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 38 ; lv2:symbol "ch_level" ; lv2:name "CH Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 39 ; lv2:symbol "ch_tone" ; lv2:name "CH Tone" ;
+      lv2:default 0.50 ; lv2:minimum 0.0 ; lv2:maximum 1.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 40 ; lv2:symbol "ch_decay" ; lv2:name "CH Decay" ;
+      lv2:default 0.42 ; lv2:minimum 0.01 ; lv2:maximum 2.0 ;
+      units:unit units:s
+    ] ,
+
+    ####################################################################
+    # OH (indices 41..43)
+    ####################################################################
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 41 ; lv2:symbol "oh_level" ; lv2:name "OH Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 42 ; lv2:symbol "oh_tone" ; lv2:name "OH Tone" ;
+      lv2:default 0.50 ; lv2:minimum 0.0 ; lv2:maximum 1.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 43 ; lv2:symbol "oh_decay" ; lv2:name "OH Decay" ;
+      lv2:default 0.50 ; lv2:minimum 0.05 ; lv2:maximum 8.0 ;
+      units:unit units:s
+    ] ,
+
+    ####################################################################
+    # Clap (indices 44..46)
+    ####################################################################
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 44 ; lv2:symbol "cp_level" ; lv2:name "Clap Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 45 ; lv2:symbol "cp_tone" ; lv2:name "Clap Tone" ;
+      lv2:default 0.50 ; lv2:minimum 0.0 ; lv2:maximum 1.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 46 ; lv2:symbol "cp_decay" ; lv2:name "Clap Decay" ;
+      lv2:default 0.30 ; lv2:minimum 0.01 ; lv2:maximum 6.0 ;
+      units:unit units:s
+    ] ,
+
+    ####################################################################
+    # Cowbell (indices 47..50)
+    ####################################################################
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 47 ; lv2:symbol "cb_level" ; lv2:name "Cowbell Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 48 ; lv2:symbol "cb_tune" ; lv2:name "Cowbell Tune" ;
+      lv2:default 540.0 ; lv2:minimum 100.0 ; lv2:maximum 2000.0 ;
+      units:unit units:hz
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 49 ; lv2:symbol "cb_decay" ; lv2:name "Cowbell Decay" ;
+      lv2:default 2.00 ; lv2:minimum 0.01 ; lv2:maximum 12.0 ;
+      units:unit units:s
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 50 ; lv2:symbol "cb_tone" ; lv2:name "Cowbell Tone" ;
+      lv2:default 0.50 ; lv2:minimum 0.0 ; lv2:maximum 1.0
+    ] ,
+
+    ####################################################################
+    # Cymbal (indices 51..53)
+    ####################################################################
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 51 ; lv2:symbol "cy_level" ; lv2:name "Cymbal Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 52 ; lv2:symbol "cy_tone" ; lv2:name "Cymbal Tone" ;
+      lv2:default 0.002 ; lv2:minimum 0.0001 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 53 ; lv2:symbol "cy_decay" ; lv2:name "Cymbal Decay" ;
+      lv2:default 2.00 ; lv2:minimum 0.10 ; lv2:maximum 12.0 ;
+      units:unit units:s
+    ] ,
+
+    ####################################################################
+    # Rimshot (indices 54..55)
+    ####################################################################
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 54 ; lv2:symbol "rim_level" ; lv2:name "Rimshot Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 55 ; lv2:symbol "rim_tone" ; lv2:name "Rimshot Tone" ;
+      lv2:default 0.50 ; lv2:minimum 0.0 ; lv2:maximum 1.0
+    ] ,
+
+    ####################################################################
+    # Maracas (indices 56..57)
+    ####################################################################
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 56 ; lv2:symbol "ma_level" ; lv2:name "Maracas Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] ,
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 57 ; lv2:symbol "ma_tone" ; lv2:name "Maracas Tone" ;
+      lv2:default 0.50 ; lv2:minimum 0.0 ; lv2:maximum 1.0
+    ] ,
+
+    ####################################################################
+    # Claves (index 58)
+    ####################################################################
+
+    [ a lv2:ControlPort, lv2:InputPort ;
+      lv2:index 58 ; lv2:symbol "clv_level" ; lv2:name "Claves Level" ;
+      lv2:default 1.00 ; lv2:minimum 0.0 ; lv2:maximum 2.0
+    ] .

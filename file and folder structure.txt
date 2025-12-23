@@ -1,0 +1,20 @@
+rs808lv2/
+  meson.build
+  src/
+    meson.build
+    rs808_sc_dsp.hpp
+    rs808_sc_dsp.cpp
+    rs808_lv2.cpp
+    rs808_urid.hpp
+    rs808_urid.cpp
+    rs808_state.hpp
+    rs808_state.cpp
+    ui/
+      meson.build
+      rs808_ui.cpp
+      knob.hpp
+      knob.cpp
+  ttl/
+    manifest.ttl
+    rs808.ttl
+    ui.ttl

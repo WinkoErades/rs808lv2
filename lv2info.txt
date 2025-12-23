@@ -1,0 +1,172 @@
+lv2info https://example.org/lv2/rs808
+
+Name:              RS808 (SC-exact)
+        Class:             Instrument Plugin
+        Has latency:       no
+        Bundle:            file:///home/winko/.lv2/rs808.lv2/
+        Binary:            file:///home/winko/.lv2/rs808.lv2/rs808.so
+        UIs:
+                https://example.org/lv2/rs808#ui
+                        Class:  http://lv2plug.in/ns/lv2core#UI
+                        Binary: file:///home/winko/.lv2/rs808.lv2/rs808_ui.so
+                        Bundle: file:///home/winko/.lv2/rs808.lv2/
+        Data URIs:         file:///home/winko/.lv2/rs808.lv2/manifest.ttl
+                           file:///home/winko/.lv2/rs808.lv2/rs808.ttl
+        Required Features: http://lv2plug.in/ns/ext/urid#map
+        Presets:
+
+        Port 0:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      main_l
+                Name:        Main L
+
+        Port 1:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      main_r
+                Name:        Main R
+
+        Port 2:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      bd_out
+                Name:        BD Out
+
+        Port 3:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      sn_out
+                Name:        SN Out
+
+        Port 4:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      cp_out
+                Name:        Clap Out
+
+        Port 5:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      rim_out
+                Name:        Rimshot Out
+
+        Port 6:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      clv_out
+                Name:        Claves Out
+
+        Port 7:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      ma_out
+                Name:        Maracas Out
+
+        Port 8:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      cb_out
+                Name:        Cowbell Out
+
+        Port 9:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      ch_out
+                Name:        Hat Out
+
+        Port 10:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      oh_out
+                Name:        OpenHat Out
+
+        Port 11:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      cy_out
+                Name:        Cymbal Out
+
+        Port 12:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      lt_out
+                Name:        LT Out
+
+        Port 13:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      mt_out
+                Name:        MT Out
+
+        Port 14:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      ht_out
+                Name:        HT Out
+
+        Port 15:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      lc_out
+                Name:        LC Out
+
+        Port 16:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      mc_out
+                Name:        MC Out
+
+        Port 17:
+                Type:        http://lv2plug.in/ns/lv2core#AudioPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      hc_out
+                Name:        HC Out
+
+        Port 18:
+                Type:        http://lv2plug.in/ns/ext/atom#AtomPort
+                             http://lv2plug.in/ns/lv2core#InputPort
+                Symbol:      midi_in
+                Name:        MIDI In
+
+        Port 19:
+                Type:        http://lv2plug.in/ns/ext/atom#AtomPort
+                             http://lv2plug.in/ns/lv2core#OutputPort
+                Symbol:      notify
+                Name:        Notify
+
+        Port 20:
+                Type:        http://lv2plug.in/ns/lv2core#ControlPort
+                             http://lv2plug.in/ns/lv2core#InputPort
+                Symbol:      master_level
+                Name:        Master Level
+                Minimum:     0.000000
+                Maximum:     1.000000
+                Default:     0.800000
+
+        Port 21:
+                Type:        http://lv2plug.in/ns/lv2core#ControlPort
+                             http://lv2plug.in/ns/lv2core#InputPort
+                Symbol:      accent_amount
+                Name:        Accent Amount
+                Minimum:     0.000000
+                Maximum:     2.000000
+                Default:     1.000000
+
+        Port 22:
+                Type:        http://lv2plug.in/ns/lv2core#ControlPort
+                             http://lv2plug.in/ns/lv2core#InputPort
+                Symbol:      note_map_mode
+                Name:        Note Map Mode
+                Minimum:     0.000000
+                Maximum:     1.000000
+                Default:     0.000000
+
+        Port 23:
+                Type:        http://lv2plug.in/ns/lv2core#ControlPort
+                             http://lv2plug.in/ns/lv2core#InputPort
+                Symbol:      learn_param
+                Name:        MIDI Learn Param Index
+                Minimum:     -1.000000
+                Maximum:     999.000000
+                Default:     -1.000000
