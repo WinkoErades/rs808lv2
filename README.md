@@ -42,36 +42,34 @@ Use the individual outputs for proper mixing.
 ## Building the plugin
 On Ubuntu Ubuntu Studio:
 
-Install build dependencies:
+### Install build dependencies:
 sudo apt update
 sudo apt install -y build-essential meson ninja-build pkg-config \
   lv2-dev lilv-utils g++ \
   libc6-dev libgtk-3-dev libcairo2-dev
 
 
-How to build:
+### How to build:
 cd rs808lv2
 rm -rf build
 meson setup build --buildtype=release --prefix=$HOME/.local
 ninja -C build
 ninja -C build install
 
-Then the bundle ends up in:
+### Then the bundle ends up in:
 ~/.local/lib/lv2/rs808.lv2/
 
 You can copy it to your favourite lv2 folder, mine happend to be ~/.lv2
 
-Carla / Ardour
-
+### Carla / Ardour / Qtractor:
 RS808 appears as an LV2 instrument plugin.
 
-License
-
+### License:
 RS808 is licensed under the GNU General Public License v3.0 or later.
 
 See the LICENSE file for details.
 
-Trademark Notice
+### Trademark Notice
 
 Roland and TR-808 are trademarks of Roland Corporation.
 This project is not affiliated with or endorsed by Roland.
